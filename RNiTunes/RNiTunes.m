@@ -628,7 +628,7 @@ RCT_EXPORT_METHOD(playTracks:(NSArray *)tracks shouldLoop:(BOOL)loop successCall
     successCallback(@[[NSNull null]]);
 }
 
-RCT_EXPORT_METHOD(play shouldLoop:(BOOL)loop) {
+RCT_EXPORT_METHOD(playLoop:(BOOL)loop) {
     NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 
     if (loop) {

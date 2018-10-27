@@ -710,7 +710,7 @@ RCT_EXPORT_METHOD(previous:(BOOL)useSystemPlayer) {
     [musicPlayer skipToPreviousItem];
 }
 
-RCT_EXPORT_METHOD(getCurrentPlayTime:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(getCurrentPlayTime:(BOOL)useSystemPlayer callback:(RCTResponseSenderBlock)callback) {
     NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 
     MPMusicPlayerController *musicPlayer;

@@ -5,6 +5,11 @@
 
 Access your iTunes library (iOS only)
 
+__NOTICE:__
+
+Forked from: [kadiks/react-native-itunes](https://github.com/kadiks/react-native-itunes)
+Support loop and system player (background player)
+
 ## [Example project](https://github.com/kadiks/rnitunesdemo)
 
 For RN older than 0.40.0, use the release 0.4.2+ of this library
@@ -204,7 +209,7 @@ Thanks to [kurokky](https://github.com/kurokky)
 
 ### 0.4.0
 
-- Get playlists 
+- Get playlists
 
 ### 0.3.1
 
@@ -237,7 +242,7 @@ Thanks to [kurokky](https://github.com/kurokky)
 - [x] Change all code and examples to ES6
 - [ ] Change all code and examples to ES7 (async/await)
 - [x] Get playlist
-- [ ] Query tracks from Apple Music [#19](/../../issues/19) 
+- [ ] Query tracks from Apple Music [#19](/../../issues/19)
 
 ### Player
 

@@ -35,17 +35,17 @@ module.exports = {
     });
   },
 
-  getCurrentPlayTime: function(params) {
+  getCurrentPlayTime: function(params, useSystemPlayer) {
     return new Promise(resolve => {
-      RNiTunes.getCurrentPlayTime(currentPlayTime => {
+      RNiTunes.getCurrentPlayTime(useSystemPlayer || false, currentPlayTime => {
         resolve(currentPlayTime);
       });
     });
   },
 
-  getCurrentTrack: function() {
+  getCurrentTrack: function(useSystemPlayer) {
     return new Promise((resolve, reject) => {
-      RNiTunes.getCurrentTrack((err, track) => {
+      RNiTunes.getCurrentTrack(useSystemPlayer || false, (err, track) => {
         if (!err) {
           resolve(track);
         }
@@ -54,23 +54,23 @@ module.exports = {
     });
   },
 
-  pause: function() {
-    RNiTunes.pause();
+  pause: function(useSystemPlayer) {
+    RNiTunes.pause(useSystemPlayer || false);
   },
 
-  play: function(loop) {
-    RNiTunes.play(loop || false);
+  play: function(loop, useSystemPlayer) {
+    RNiTunes.play(loop || false, useSystemPlayer || false);
   },
 
-  previous: function() {
-    RNiTunes.previous();
+  previous: function(useSystemPlayer) {
+    RNiTunes.previous(useSystemPlayer || false);
   },
 
-  next: function() {
-    RNiTunes.next();
+  next: function(useSystemPlayer) {
+    RNiTunes.next(useSystemPlayer || false);
   },
 
-  playTrack: function(trackItem) {
+  playTrack: function(trackItem, useSystemPlayer) {
     return new Promise((resolve, reject) => {
       if (
         !trackItem.hasOwnProperty("title") ||
@@ -81,7 +81,7 @@ module.exports = {
         );
         return;
       }
-      RNiTunes.playTrack(trackItem || {}, loop || false, err => {
+      RNiTunes.playTrack(trackItem || {}, loop || false, useSystemPlayer || false, err => {
         if (!err) {
           resolve();
         } else {
@@ -91,7 +91,7 @@ module.exports = {
     });
   },
 
-  playTracks: function(trackItems, loop) {
+  playTracks: function(trackItems, loop, useSystemPlayer) {
     return new Promise((resolve, reject) => {
       if (Array.isArray(trackItems) === false || trackItems.length === 0) {
         reject("No track item have been found");
@@ -105,7 +105,7 @@ module.exports = {
           "All track items should have [title] and [albumTitle] properties"
         );
       }
-      RNiTunes.playTracks(trackItems || [], loop || false, err => {
+      RNiTunes.playTracks(trackItems || [], loop || false, useSystemPlayer || false, err => {
         if (!err) {
           resolve();
         } else {
@@ -115,11 +115,11 @@ module.exports = {
     });
   },
 
-  seekTo: function(playingTime) {
-    RNiTunes.seekTo(playingTime);
+  seekTo: function(playingTime, useSystemPlayer) {
+    RNiTunes.seekTo(playingTime, useSystemPlayer || false);
   },
 
-  stop: function() {
-    RNiTunes.stop();
+  stop: function(useSystemPlayer) {
+    RNiTunes.stop(useSystemPlayer || false);
   }
 };

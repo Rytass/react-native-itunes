@@ -70,7 +70,7 @@ module.exports = {
     RNiTunes.next(useSystemPlayer || false);
   },
 
-  playTrack: function(trackItem, useSystemPlayer) {
+  playTrack: function(trackItem, loop, useSystemPlayer) {
     return new Promise((resolve, reject) => {
       if (
         !trackItem.hasOwnProperty("title") ||

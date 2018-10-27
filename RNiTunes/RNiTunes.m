@@ -539,7 +539,7 @@ RCT_EXPORT_METHOD(getPlaylists:(NSDictionary *)params successCallback:(RCTRespon
     successCallback(@[playlistsArray]);
 }
 
-RCT_EXPORT_METHOD(playTrack:(NSDictionary *)trackItem callback:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(playTrack:(NSDictionary *)trackItem shouldLoop:(BOOL)loop callback:(RCTResponseSenderBlock)callback) {
     NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 
     // NSLog(@"trackItem %@", trackItem);
@@ -561,6 +561,13 @@ RCT_EXPORT_METHOD(playTrack:(NSDictionary *)trackItem callback:(RCTResponseSende
         {
             // NSLog(@"song exists! %@");
             [[MPMusicPlayerController applicationMusicPlayer] setQueueWithQuery: songQuery];
+
+            if (loop) {
+                [[MPMusicPlayerController applicationMusicPlayer] setRepeatMode: MPMusicRepeatModeOne];
+            } else {
+                [[MPMusicPlayerController applicationMusicPlayer] setRepeatMode: MPMusicRepeatModeDefault];
+            }
+
             [[MPMusicPlayerController applicationMusicPlayer] play];
 
             callback(@[[NSNull null]]);
@@ -572,7 +579,7 @@ RCT_EXPORT_METHOD(playTrack:(NSDictionary *)trackItem callback:(RCTResponseSende
     }
 }
 
-RCT_EXPORT_METHOD(playTracks:(NSArray *)tracks successCallback:(RCTResponseSenderBlock)successCallback) {
+RCT_EXPORT_METHOD(playTracks:(NSArray *)tracks shouldLoop:(BOOL)loop successCallback:(RCTResponseSenderBlock)successCallback) {
     NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 
     NSMutableArray *playlist = [[NSMutableArray alloc] initWithCapacity:0];
@@ -610,13 +617,25 @@ RCT_EXPORT_METHOD(playTracks:(NSArray *)tracks successCallback:(RCTResponseSende
     [musicPlayer setQueueWithItemCollection:currentQueue];
     [musicPlayer setNowPlayingItem:nowPlaying];
 
+    if (loop) {
+        [musicPlayer setRepeatMode: MPMusicRepeatModeOne];
+    } else {
+        [musicPlayer setRepeatMode: MPMusicRepeatModeDefault];
+    }
+
     [musicPlayer play];
 
     successCallback(@[[NSNull null]]);
 }
 
-RCT_EXPORT_METHOD(play) {
+RCT_EXPORT_METHOD(play shouldLoop:(BOOL)loop) {
     NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+
+    if (loop) {
+        [[MPMusicPlayerController applicationMusicPlayer] setRepeatMode: MPMusicRepeatModeOne];
+    } else {
+        [[MPMusicPlayerController applicationMusicPlayer] setRepeatMode: MPMusicRepeatModeDefault];
+    }
 
     [[MPMusicPlayerController applicationMusicPlayer] play];
 }

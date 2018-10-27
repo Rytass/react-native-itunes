@@ -58,8 +58,8 @@ module.exports = {
     RNiTunes.pause();
   },
 
-  play: function() {
-    RNiTunes.play();
+  play: function(loop) {
+    RNiTunes.play(loop || false);
   },
 
   previous: function() {
@@ -81,7 +81,7 @@ module.exports = {
         );
         return;
       }
-      RNiTunes.playTrack(trackItem || {}, err => {
+      RNiTunes.playTrack(trackItem || {}, loop || false, err => {
         if (!err) {
           resolve();
         } else {
@@ -91,7 +91,7 @@ module.exports = {
     });
   },
 
-  playTracks: function(trackItems) {
+  playTracks: function(trackItems, loop) {
     return new Promise((resolve, reject) => {
       if (Array.isArray(trackItems) === false || trackItems.length === 0) {
         reject("No track item have been found");
@@ -105,7 +105,7 @@ module.exports = {
           "All track items should have [title] and [albumTitle] properties"
         );
       }
-      RNiTunes.playTracks(trackItems || [], err => {
+      RNiTunes.playTracks(trackItems || [], loop || false, err => {
         if (!err) {
           resolve();
         } else {

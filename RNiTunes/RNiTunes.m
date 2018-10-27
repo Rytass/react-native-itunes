@@ -648,7 +648,7 @@ RCT_EXPORT_METHOD(playTracks:(NSArray *)tracks shouldLoop:(BOOL)loop useSystemPl
     successCallback(@[[NSNull null]]);
 }
 
-RCT_EXPORT_METHOD(play:(BOOL)loop, useSystemPlayer:(BOOL)useSystemPlayer) {
+RCT_EXPORT_METHOD(play:(BOOL)loop useSystemPlayer:(BOOL)useSystemPlayer) {
     NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 
     MPMusicPlayerController *musicPlayer;
